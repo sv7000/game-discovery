@@ -50,6 +50,10 @@ export interface Game {
 //    return {error, games, isLoading};
 // }
 
-const useGames = (selectedGenre: Genre | null) => useData<Game>('/games', {params: {genres: selectedGenre?.id}}, [selectedGenre?.id])
+const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => 
+useData<Game>('/games', 
+{params: {genres: selectedGenre?.id, platforms: selectedPlatform?.id}}, 
+[selectedGenre?.id, selectedPlatform?.id]
+)
 
 export default useGames;

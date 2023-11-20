@@ -7,9 +7,12 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenre";
 
 import PlatformSelector from "./components/PlatformSelector";
+import { Platform } from "./hooks/useGames";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  //with this I am changing the gamegrid games on the basis of selection
+  const [selectedPlatform, setSelectedPlatform]  = useState<Platform|null>(null)
 
   return (
     <>
@@ -27,8 +30,8 @@ function App() {
           <Navbar />
         </GridItem>
         <GridItem pl="2" area={"main"}>
-          <PlatformSelector />
-          <GameGrid selectedGenre={selectedGenre} />
+          <PlatformSelector selectedPlatfrom={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)}/>
+          <GameGrid selectedGenre={selectedGenre} selectedPlatform={selectedPlatform} />
         </GridItem>
         <Show above="lg">
           <GridItem pl="2" area={"aside"}>
