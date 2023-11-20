@@ -9,10 +9,18 @@ import { Genre } from "./hooks/useGenre";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
+
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  // const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   //with this I am changing the gamegrid games on the basis of selection
-  const [selectedPlatform, setSelectedPlatform]  = useState<Platform|null>(null)
+  // const [selectedPlatform, setSelectedPlatform]  = useState<Platform|null>(null)
+
+  //using query object pattern for using all variables As an object
 
   return (
     <>
@@ -30,14 +38,14 @@ function App() {
           <Navbar />
         </GridItem>
         <GridItem pl="2" area={"main"}>
-          <PlatformSelector selectedPlatfrom={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)}/>
-          <GameGrid selectedGenre={selectedGenre} selectedPlatform={selectedPlatform} />
+          <PlatformSelector selectedPlatfrom={gameQuery.platform} onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}/>
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
         <Show above="lg">
           <GridItem pl="2" area={"aside"}>
             <GenreList
-              selectedGenre={selectedGenre}
-              onSelectedGenre={(genre) => setSelectedGenre(genre)}
+              selectedGenre={gameQuery.genre}
+              onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
             />
           </GridItem>
         </Show>
