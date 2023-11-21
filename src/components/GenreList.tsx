@@ -10,7 +10,7 @@ interface Props{
 const GenreList = ({ selectedGenre,onSelectedGenre }: Props ) => {
   const { data, isLoading, error } = useGenre();
 
-  if(error)return;
+  if(error)return null;
   // const {genres} = useGenre();
   const skeletonsList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   return (
